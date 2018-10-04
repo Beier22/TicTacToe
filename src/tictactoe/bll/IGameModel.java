@@ -12,13 +12,14 @@ package tictactoe.bll;
 public interface IGameModel
 {
 
+    
     /**
      * Returns 0 for player 0, 1 for player 1.
      *
      * @return int Id of the next player.
      */
     public int getNextPlayer();
-
+    
     /**
      * Attempts to let the current player play at the given coordinates. If the
      * attempt is succesfull the current player has ended his turn and it is the

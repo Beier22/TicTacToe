@@ -35,10 +35,29 @@ public class TicTacViewController implements Initializable
     
     private static final String TXT_PLAYER = "Player: ";
     private IGameModel game;
+    @FXML
+    private Button btn1;
+    @FXML
+    private Button btn2;
+    @FXML
+    private Button btn3;
+    @FXML
+    private Button btn4;
+    @FXML
+    private Button btn5;
+    @FXML
+    private Button btn6;
+    @FXML
+    private Button btn7;
+    @FXML
+    private Button btn8;
+    @FXML
+    private Button btn9;
 
     @FXML
     private void handleButtonAction(ActionEvent event)
     {
+        System.out.println(""+btn1.getText());
         try
         {
             Integer row = GridPane.getRowIndex((Node) event.getSource());
@@ -58,6 +77,7 @@ public class TicTacViewController implements Initializable
                     Button btn = (Button) event.getSource();
                     String xOrO = player == 0 ? "X" : "O";
                     btn.setText(xOrO);
+                    game.getNextPlayer();
                     setPlayer();
                 }
             }
