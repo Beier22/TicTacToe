@@ -91,8 +91,8 @@ public class GameBoard implements IGameModel
             return 0;
         else if((board[2][0] != -1) && (board[2][0] == board[1][1]) && (board[1][1] == board[0][2]))
             return 0;
-        else if((board[0][0] == -1) && (board[0][1] == -1) && (board[0][2] == -1) && (board[1][0] == -1) && 
-                (board[1][1] == -1) && (board[1][2] == -1) && (board[2][0] == -1) && (board[2][1] == -1) && (board[2][2] == -1))
+        else if((board[0][0] != -1) && (board[0][1] != -1) && (board[0][2] != -1) && (board[1][0] != -1) && 
+                (board[1][1] != -1) && (board[1][2] != -1) && (board[2][0] != -1) && (board[2][1] != -1) && (board[2][2] != -1))
             return -1;
         else
             return 1;
