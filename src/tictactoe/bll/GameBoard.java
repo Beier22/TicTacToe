@@ -16,10 +16,11 @@ public class GameBoard implements IGameModel
  
     int currentPlayer = 0;
     int board[][] = new int[3][3];
+    int drawCounter = 0;
     
     public void startUp(){
         
-        
+        drawCounter = 0;
         for(int k=0; k<3; k++)
         {
             for(int j=0; j<3; j++)
@@ -66,6 +67,7 @@ public class GameBoard implements IGameModel
         if(board[row][col]==-1)
         {
             board[row][col]= currentPlayer;
+            drawCounter++;
             return true;
         } else {
             return false;
@@ -75,27 +77,48 @@ public class GameBoard implements IGameModel
     public int isGameOver()
     {
         //TODO Implement this method
-        if((board[0][0] != -1) && (board[0][0] == board[0][1]) && (board[0][1] == board[0][2]))
-            return 0;
-        else if((board[1][0] != -1) && (board[1][0] == board[1][1]) && (board[1][1] == board[1][2]))
-            return 0;
-        else if((board[2][0] != -1) && (board[2][0] == board[2][1]) && (board[2][1] == board[2][2]))
-            return 0;
-        else if((board[0][0] != -1) && (board[0][0] == board[1][0]) && (board[1][0] == board[2][0]))
-            return 0;
-        else if((board[0][1] != -1) && (board[0][1] == board[1][1]) && (board[1][1] == board[2][1]))
-            return 0;
-        else if((board[0][2] != -1) && (board[0][2] == board[1][2]) && (board[1][2] == board[2][2]))
-            return 0;
-        else if((board[0][0] != -1) && (board[0][0] == board[1][1]) && (board[1][1] == board[2][2]))
-            return 0;
-        else if((board[2][0] != -1) && (board[2][0] == board[1][1]) && (board[1][1] == board[0][2]))
-            return 0;
-        else if((board[0][0] != -1) && (board[0][1] != -1) && (board[0][2] != -1) && (board[1][0] != -1) && 
-                (board[1][1] != -1) && (board[1][2] != -1) && (board[2][0] != -1) && (board[2][1] != -1) && (board[2][2] != -1))
-            return -1;
-        else
-            return 1;
+//        if((board[0][0] != -1) && (board[0][0] == board[0][1]) && (board[0][1] == board[0][2]))
+//            return 0;
+//        else if((board[1][0] != -1) && (board[1][0] == board[1][1]) && (board[1][1] == board[1][2]))
+//            return 0;
+//        else if((board[2][0] != -1) && (board[2][0] == board[2][1]) && (board[2][1] == board[2][2]))
+//            return 0;
+//        else if((board[0][0] != -1) && (board[0][0] == board[1][0]) && (board[1][0] == board[2][0]))
+//            return 0;
+//        else if((board[0][1] != -1) && (board[0][1] == board[1][1]) && (board[1][1] == board[2][1]))
+//            return 0;
+//        else if((board[0][2] != -1) && (board[0][2] == board[1][2]) && (board[1][2] == board[2][2]))
+//            return 0;
+//        else if((board[0][0] != -1) && (board[0][0] == board[1][1]) && (board[1][1] == board[2][2]))
+//            return 0;
+//        else if((board[2][0] != -1) && (board[2][0] == board[1][1]) && (board[1][1] == board[0][2]))
+//            return 0;
+//        else if((board[0][0] != -1) && (board[0][1] != -1) && (board[0][2] != -1) && (board[1][0] != -1) && 
+//                (board[1][1] != -1) && (board[1][2] != -1) && (board[2][0] != -1) && (board[2][1] != -1) && (board[2][2] != -1))
+//            return -1;
+//        else
+//            return 1;
+        
+        for(int i = 0; i < 3; i++)
+        {
+            if((board[i][0] != -1) && (board[i][0] == board[i][1]) && (board[i][1] == board[i][2]))
+                return 0;
+            else if((board[0][i] != -1) && (board[0][i] == board[1][i]) && (board[1][i] == board[2][i]))
+                return 0;
+        }
+            if((board[0][0] != -1) && (board[0][0] == board[1][1]) && (board[1][1] == board[2][2]))
+                return 0;
+            else if((board[2][0] != -1) && (board[2][0] == board[1][1]) && (board[1][1] == board[0][2]))
+                return 0;
+            else if(drawCounter == 9)
+                return -1;
+            else 
+                return 1;
+        
+        
+        
+        
+        
     }
 
     /**
