@@ -53,29 +53,35 @@ public class TicTacViewController implements Initializable
     private Button btn8;
     @FXML
     private Button btn9;
+    
+    boolean endGame = false;
 
     @FXML
     private void handleButtonAction(ActionEvent event)
     {
-        System.out.println(""+btn1.getText());
+        
         try
         {
             Integer row = GridPane.getRowIndex((Node) event.getSource());
             Integer col = GridPane.getColumnIndex((Node) event.getSource());
             int r = (row == null) ? 0 : row;
             int c = (col == null) ? 0 : col;
-            int player = game.getNextPlayer();
-            if (game.play(c, r))
+            
+            if (game.play(c, r) && endGame == false)
             {
-                if (game.isGameOver())
+                String player = game.getNextPlayer();
+                if (game.isGameOver() == 0)
                 {
-                    int winner = game.getWinner();
+                    String winner = game.getWinner();
                     displayWinner(winner);
-                }
-                else
-                {
                     Button btn = (Button) event.getSource();
-                    String xOrO = player == 0 ? "X" : "O";
+                    btn.setText(winner);
+                    endGame = true;
+                } else if (game.isGameOver() == -1){
+                    displayWinner("");
+                } else {
+                    Button btn = (Button) event.getSource();
+                    String xOrO = player == "O" ? "X" : "O";
                     btn.setText(xOrO);
                     game.getNextPlayer();
                     setPlayer();
@@ -90,7 +96,9 @@ public class TicTacViewController implements Initializable
     @FXML
     private void handleNewGame(ActionEvent event)
     {
+        endGame = false;
         game.newGame();
+        game.startUp();
         setPlayer();
         clearBoard();
     }
@@ -99,6 +107,7 @@ public class TicTacViewController implements Initializable
     public void initialize(URL url, ResourceBundle rb)
     {
         game = new GameBoard();
+        game.startUp();
         setPlayer();
     }
 
@@ -107,12 +116,12 @@ public class TicTacViewController implements Initializable
         lblPlayer.setText(TXT_PLAYER + game.getNextPlayer());
     }
 
-    private void displayWinner(int winner)
+    private void displayWinner(String winner)
     {
         String message = "";
         switch (winner)
         {
-            case -1:
+            case "":
                 message = "It's a draw :-(";
                 break;
             default:

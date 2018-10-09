@@ -12,13 +12,21 @@ package tictactoe.bll;
 public interface IGameModel
 {
 
+    /**
+     * Clears the board behind the scenes on startup and new game
+     * Without this the buttons would not be able to be pressed upon starting 
+     * a new game, if they had been pressed in a previous game
+     */
+    public void startUp();
+    
+    
     
     /**
      * Returns 0 for player 0, 1 for player 1.
      *
      * @return int Id of the next player.
      */
-    public int getNextPlayer();
+    public String getNextPlayer();
     
     /**
      * Attempts to let the current player play at the given coordinates. If the
@@ -38,14 +46,14 @@ public interface IGameModel
      *
      * @return true if the game is over, else it will retun false.
      */
-    public boolean isGameOver();
+    public int isGameOver();
 
     /**
      * Gets the id of the winner, -1 if its a draw.
      *
      * @return int id of winner, or -1 if draw.
      */
-    public int getWinner();
+    public String getWinner();
 
     /**
      * Resets the game to a new game state.

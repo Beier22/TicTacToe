@@ -5,29 +5,47 @@
  */
 package tictactoe.bll;
 
+
+
 /**
  *
  * @author Stegger
  */
 public class GameBoard implements IGameModel
 {
-    
+ 
     int currentPlayer = 0;
+    int board[][] = new int[3][3];
+    
+    public void startUp(){
+        
+        
+        for(int k=0; k<3; k++)
+        {
+            for(int j=0; j<3; j++)
+            {
+                board[k][j] = -1;
+            }
+        }
+    }
+    
+    
+    
     
     /**
      * Returns 0 for player 0, 1 for player 1.
      *
      * @return int Id of the next player.
      */
-    public int getNextPlayer()
+    public String getNextPlayer()
     {
         if(currentPlayer==1)
         {
             currentPlayer=0;
-            return 0;
+            return "O";
         } else {
             currentPlayer=1;
-            return 1;
+            return "X";
         }
     }
 
@@ -44,14 +62,40 @@ public class GameBoard implements IGameModel
     public boolean play(int col, int row)
     {
         //TODO Implement this method
-        
-        return true;
+        //Need to use double arrays (String[][])
+        if(board[row][col]==-1)
+        {
+            board[row][col]= currentPlayer;
+            return true;
+        } else {
+            return false;
+        }
     }
 
-    public boolean isGameOver()
+    public int isGameOver()
     {
         //TODO Implement this method
-        return false;
+        if((board[0][0] != -1) && (board[0][0] == board[0][1]) && (board[0][1] == board[0][2]))
+            return 0;
+        else if((board[1][0] != -1) && (board[1][0] == board[1][1]) && (board[1][1] == board[1][2]))
+            return 0;
+        else if((board[2][0] != -1) && (board[2][0] == board[2][1]) && (board[2][1] == board[2][2]))
+            return 0;
+        else if((board[0][0] != -1) && (board[0][0] == board[1][0]) && (board[1][0] == board[2][0]))
+            return 0;
+        else if((board[0][1] != -1) && (board[0][1] == board[1][1]) && (board[1][1] == board[2][1]))
+            return 0;
+        else if((board[0][2] != -1) && (board[0][2] == board[1][2]) && (board[1][2] == board[2][2]))
+            return 0;
+        else if((board[0][0] != -1) && (board[0][0] == board[1][1]) && (board[1][1] == board[2][2]))
+            return 0;
+        else if((board[2][0] != -1) && (board[2][0] == board[1][1]) && (board[1][1] == board[0][2]))
+            return 0;
+        else if((board[0][0] == -1) && (board[0][1] == -1) && (board[0][2] == -1) && (board[1][0] == -1) && 
+                (board[1][1] == -1) && (board[1][2] == -1) && (board[2][0] == -1) && (board[2][1] == -1) && (board[2][2] == -1))
+            return -1;
+        else
+            return 1;
     }
 
     /**
@@ -59,10 +103,12 @@ public class GameBoard implements IGameModel
      *
      * @return int id of winner, or -1 if draw.
      */
-    public int getWinner()
+    public String getWinner()
     {
         //TODO Implement this method
-        return -1;
+        String winner = currentPlayer == 1 ? "O" : "X";
+        return winner;
+        //return -1;
     }
 
     /**
